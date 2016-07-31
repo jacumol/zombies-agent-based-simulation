@@ -1,0 +1,17 @@
+.vagrant
+.ipynb_checkpoints
+*.box
+*.pyc
+*.bak
+*.dir
+*.dat
+*.pid
+*.bson
+*.json
+*.zip
+*.tar.gz
+*.bak
+*.dat
+*.dir
+*.xls
+*.xlsx
