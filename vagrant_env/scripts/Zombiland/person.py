@@ -7,7 +7,7 @@ from random import uniform
 
 #----Installed packages----#
 
-#----Import PitMotion Classes----#
+#----Import Classes----#
 
 class Person(object):
     """docstring for Person"""
