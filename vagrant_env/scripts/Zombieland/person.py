@@ -34,14 +34,20 @@ class Person(object):
         direction_vector = (vector[0]/magnitude, vector[1]/magnitude)
         return direction_vector
 
-    def is_new_position_ok(self, next_pos):
+    def check_new_pos(self, next_pos):
         """Function that evaluates if the new position is allowed"""
-        result = False
-        if 0.0 <= next_pos[0] <= self.allowed_area[0] and \
-                0.0 <= next_pos[1] <= self.allowed_area[1]:
-            result = True
+        pos_x, pos_y = next_pos
+        if pos_x < 0.0:
+            pos_x = 0.0
+        elif pos_x > self.allowed_area[0]:
+            pos_x = self.allowed_area[0]
 
-        return result
+        if pos_y < 0.0:
+            pos_y = 0.0
+        elif pos_y > self.allowed_area[1]:
+            pos_y = self.allowed_area[1]
+
+        return (pos_x, pos_y)
 
 
     def move_next_point(self, seconds, nearest_zombie_pos=None):
@@ -51,16 +57,17 @@ class Person(object):
         direction_vector = self.get_next_moving_direction(nearest_zombie_pos)
 
         magnitude = self.speed * seconds
-        theta = math.atan(direction_vector[0]/direction_vector[1])
-        next_pos = (self.pos[0] + magnitude*math.cos(theta), \
-                    self.pos[1] + magnitude*math.sin(theta))
+        if direction_vector[0] == 0:
+            next_pos = (self.pos[0], \
+                        self.pos[1] + magnitude)
+        else:
+            theta = math.atan(direction_vector[1]/direction_vector[0])
+            next_pos = (self.pos[0] + magnitude*math.cos(theta), \
+                        self.pos[1] + magnitude*math.sin(theta))
 
         #Check if that position is allowed
-        if self.is_new_position_ok(next_pos):
-            self.pos = next_pos
-            print
-        else:
-            print "No way out"
+        next_pos = self.check_new_pos(next_pos)
+        self.pos = next_pos
 
 def main():
     p1 = Person(0)
