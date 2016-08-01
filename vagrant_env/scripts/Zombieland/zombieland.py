@@ -177,8 +177,8 @@ class Zombieland(object):
 
 
 def main():
-    zombieland = Zombieland(num_persons=1000, num_zombies=10,
-                            allowed_area=(1000.0, 1000.0))
+    zombieland = Zombieland(num_persons=100, num_zombies=1,
+                            allowed_area=(100.0, 100.0))
     zombieland.populate_city()
     zombieland.let_the_game_begins()
 
