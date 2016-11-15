@@ -96,10 +96,8 @@ class Zombie(Agent):
                 z = Zombie(unique_id, self.model, speed)
                 self.model.schedule.add(z)
 
-                # Add the agent to a random grid cell
-                x = uniform(0.0, self.model.grid.x_max)
-                y = uniform(0.0, self.model.grid.y_max)
-                self.model.grid.place_agent(z, (x, y))
+                # Add the agent to the grid cell
+                self.model.grid.place_agent(z, n.pos)
 
 
     def step(self):
